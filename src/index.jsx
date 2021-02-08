@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/index.css'
-import App from './components/App/App'
+import { App } from './components'
 import { getStore } from './store'
 import * as utils from './utils'
 import { routes } from './consts'

@@ -1,3 +1,1 @@
-export const routes = {
-  ROOT: '/',
-}
+export * from './consts'
