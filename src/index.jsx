@@ -4,11 +4,13 @@ import './styles/index.css'
 import { App } from './components'
 import { getStore } from './store'
 import * as utils from './utils'
-import { routes } from './consts'
+import { routes, backendUrl } from './consts'
 import { createBrowserHistory } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
 import { Route, Switch, Redirect } from 'react-router'
+import { Provider as HttpProvider } from 'use-http'
+import { globalOptions } from './http'
 
 const history = createBrowserHistory()
 
@@ -16,10 +18,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={getStore(history)}>
       <ConnectedRouter history={history}>
-        <Switch>
-          <Route path={routes.ROOT} component={App} />
-          <Route render={() => <Redirect to={routes.ROOT} />} />
-        </Switch>
+        <HttpProvider url={backendUrl} options={globalOptions()}>
+          <Switch>
+            <Route path={routes.ROOT} component={App} />
+            <Route render={() => <Redirect to={routes.ROOT} />} />
+          </Switch>
+        </HttpProvider>
       </ConnectedRouter>
     </Provider>
   </React.StrictMode>,
